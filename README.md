@@ -172,3 +172,6 @@ The Rails application needs to know the configuration data to get access to the 
 For PostgreSQL the approach to pass the DB information is similar to Rails as a file to store the password has been used, called ```postgres_pass.txt``` which content will be mounted in the container in the path ```/run/secrets/postgres_pass``` as a secret, so that it can not be read using ```docker inspect```.
 
 However, although this is legit and the sensitive information is not shared in the repository, any process with container access could run a command like ```cat /run/secrets/postgres_pass``` and the secret content would be revealed. For production or non-development environments in general, it is recommended to use other solutions like Docker Swarm or even cloud storage services to get the secrets during the container execution time.
+
+Furthermore, the ```/config/master.key``` has been uploaded to the repository only for testing purposes and make the project easier to run as this set up is not intended to work on production environment and the intention is to be run locally only.
+For Production environments is would be a good fit to use a cloud storage service to keep the content of the ```master.key``` secure and add it as environment variable to the container set up when using CI/CD to deploy the application. 
